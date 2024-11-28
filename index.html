@@ -26,29 +26,19 @@ let container = document.querySelector(".container");
  container.style.width = '1500px';
  container.style.height = '1500px';
 
- let gridSizeInput = document.querySelector('.gridSize');
- let gridSize = gridSizeInput.value;
+//  let gridSizeInput = document.querySelector('.gridSize');
+//  let gridSize = gridSizeInput.value;
 
 
 
-
+let gridSize = 10;
 //Making of the grid
-const addGridButton = document.querySelector('.addGrid');
-addGridButton.addEventListener('click',()=>{
-  setGrid()
-})
-function setGrid(gridSize){
-  for(let i = 0;i < gridSize; i++){
-for(let j = 0; j<gridSize; j++){
-  let div = document.createElement('div');
-  div.classList.add('div');
-
-  div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
-
-  div.style.opacity = '0'
-
-}
-// for(let i = 0;i < gridSize; i++){
+// const addGridButton = document.querySelector('.addGrid');
+// addGridButton.addEventListener('click',()=>{
+//   setGrid()
+// })
+// function setGrid(gridSize){
+//   for(let i = 0;i < gridSize; i++){
 // for(let j = 0; j<gridSize; j++){
 //   let div = document.createElement('div');
 //   div.classList.add('div');
@@ -56,6 +46,16 @@ for(let j = 0; j<gridSize; j++){
 //   div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
 
 //   div.style.opacity = '0'
+
+// }
+for(let i = 0;i < gridSize; i++){
+for(let j = 0; j<gridSize; j++){
+  let div = document.createElement('div');
+  div.classList.add('div');
+
+  div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
+
+  div.style.opacity = '0'
 
   div.addEventListener('mouseover',()=> {
      let opacityValue = parseFloat(div.style.opacity) + 0.5; //turn string into number
