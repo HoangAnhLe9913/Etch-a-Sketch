@@ -7,81 +7,67 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<button>Reset grid</button>
-<input class="gridSize">
-<button class="addGrid">Choose a number of grid</button>
-  <div style="height: 50px; /* Adjust as needed */
-  border: 1px solid lightgray;
-  transition: background-color 0.3s, opacity 0.3s;"
-   class="container"></div>
+<input class="gridSize" placeholder="Enter grid size (1-100)">
+
+<button class="addGrid">Add grid</button>
+  <div class="container"></div>
+
+
   <script>
-
-
+//Grabbing the div for the grid container
 let container = document.querySelector(".container");
-
-
-
  container.style.display = 'flex';
  container.style.flexWrap = 'wrap';
  container.style.width = '1500px';
  container.style.height = '1500px';
 
-//  let gridSizeInput = document.querySelector('.gridSize');
-//  let gridSize = gridSizeInput.value;
-
-
-
-let gridSize = 10;
-//Making of the grid
-// const addGridButton = document.querySelector('.addGrid');
-// addGridButton.addEventListener('click',()=>{
-//   setGrid()
-// })
-// function setGrid(gridSize){
-//   for(let i = 0;i < gridSize; i++){
-// for(let j = 0; j<gridSize; j++){
-//   let div = document.createElement('div');
-//   div.classList.add('div');
-
-//   div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
-
-//   div.style.opacity = '0'
-
-// }
-for(let i = 0;i < gridSize; i++){
+//Determine default grid size
+let gridSize = 15;
+//Create the default grid on page load
+function makeGrid(gridSize){
+ 
+ for(let i = 0;i < gridSize; i++){
 for(let j = 0; j<gridSize; j++){
-  let div = document.createElement('div');
-  div.classList.add('div');
 
-  div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
+ let div = document.createElement('div');
+ div.classList.add('div');
+ div.style.flex= `1 1 calc(${100 / gridSize}% - 2px)`;
+ div.style.opacity = '0'
 
-  div.style.opacity = '0'
+ //Add hover effect to create pixel trail
+ div.addEventListener('mouseover',()=> {
+    let opacityValue = parseFloat(div.style.opacity) + 0.5; //turn string into number
+    if (opacityValue> 1.0){
+     opacityValue = 1.0; 
+    } 
+    div.style.opacity = opacityValue; //u dont have to convert it back to string because JavaScript does it on its own
+ div.style.backgroundColor = 'red';
 
-  div.addEventListener('mouseover',()=> {
-     let opacityValue = parseFloat(div.style.opacity) + 0.5; //turn string into number
-     if (opacityValue> 1.0){
-      opacityValue = 1.0;
-      
-     } 
-
-     div.style.opacity = opacityValue; //u dont have to convert it back to string because JavaScript does it on its own
-    //  console.log(div.style.opacity)
-    
-    //currentOpacity = initialOpacity;
-
-
-  
-  div.style.backgroundColor = 'black';
-  
 })
-  container.appendChild(div);
+ container.appendChild(div);
+}};
 }
-};
 
-let resetGrid = document.querySelector("button");
-resetGrid.addEventListener('click', ()=> {
-  container.innerHTML = '';
-})
+let addGrid = document.querySelector('.addGrid');
+addGrid.addEventListener('click',()=>{
+  let gridSizeInput = document.querySelector('.gridSize')
+gridSize = parseInt(gridSizeInput.value); //because the value you obtain from HTMl is always a string, even if the user enters a number. Js doesnt automatic string to number
+
+//validate grid size 
+if (gridSize <1 || gridSize >100|| isNaN(gridSize)|| !gridSizeInput.value ){
+  alert('Please enter a number from 1 to 100');
+  return; //ensure the code stop executing if any of the condition is true
+}
+
+
+//clear the existing grid
+container.innerHTML = '';
+makeGrid(gridSize);
+});
+
+
+const defaultGridSize = 15;
+makeGrid(defaultGridSize);
   </script>
 </body>
 </html>
