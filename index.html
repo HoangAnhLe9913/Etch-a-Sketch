@@ -23,9 +23,9 @@ let container = document.querySelector(".container");
 
 //Determine default grid size
 let gridSize = 15;
-//Create the default grid on page load
+
+//reate the grid based on gridSize parameter
 function makeGrid(gridSize){
- 
  for(let i = 0;i < gridSize; i++){
 for(let j = 0; j<gridSize; j++){
 
@@ -62,12 +62,13 @@ if (gridSize <1 || gridSize >100|| isNaN(gridSize)|| !gridSizeInput.value ){
 
 //clear the existing grid
 container.innerHTML = '';
+
+// Pass updated gridSize to makeGrid
 makeGrid(gridSize);
 });
 
-
-const defaultGridSize = 15;
-makeGrid(defaultGridSize);
+// Initialize the grid with default grid size
+makeGrid(gridSize);
   </script>
 </body>
 </html>
